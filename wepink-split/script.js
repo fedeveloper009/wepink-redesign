@@ -16,6 +16,28 @@
     nav.style.borderBottomColor = window.scrollY > 12 ? 'var(--line-2)' : 'var(--line)';
   }, {passive:true});
 
+  /* Mobile navigation */
+  var mobileMenuToggle = document.getElementById('mobileMenuToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  if(mobileMenuToggle && mobileMenu){
+    function closeMobileMenu(){
+      mobileMenu.classList.remove('open');
+      mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      mobileMenuToggle.setAttribute('aria-label', 'Abrir menu');
+    }
+    mobileMenuToggle.addEventListener('click', function(){
+      var isOpen = mobileMenu.classList.toggle('open');
+      mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+      mobileMenuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', closeMobileMenu);
+    });
+    window.addEventListener('resize', function(){
+      if(window.innerWidth > 900) closeMobileMenu();
+    });
+  }
+
   /* 3D tilt on hero + spotlight bottle via mouse position */
   if(!reduceMotion){
     var stage = document.querySelector('.wp-stage');
@@ -103,8 +125,8 @@
    CHAT WIDGET — trilhas fixas de atendimento
 --------------------------------------------------------- */
 (function(){
-  var WHATSAPP_URL = 'https://wa.me/5511999999999';
-  var EMAIL_URL = 'mailto:atendimento@wepink.com.br';
+  var WHATSAPP_URL = 'https://wa.me/5511941620531';
+  var EMAIL_URL = 'mailto:jujubelo009@gmail.com';
 
   var flow = {
     root: {
@@ -195,7 +217,7 @@
       ]
     },
     humano: {
-      bot: 'Sem problemas — isso é melhor resolvido com uma pessoa do nosso time. Você pode falar com a gente por WhatsApp ou e-mail; geralmente respondemos em até 2h úteis.',
+      bot: 'Sem problemas — isso é melhor resolvido com uma pessoa do nosso time. Fale pelo WhatsApp +55 11 94162-0531 ou por e-mail; geralmente respondemos em até 2h úteis.',
       options: [
         { label: 'Chamar no WhatsApp', action: 'link', url: WHATSAPP_URL },
         { label: 'Enviar e-mail', action: 'link', url: EMAIL_URL },
